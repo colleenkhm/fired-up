@@ -1,4 +1,4 @@
-class Player {
+export class Player {
     constructor(game){
         this.game = game;
         this.width = 100;
@@ -8,11 +8,9 @@ class Player {
         this.image = document.getElementById('player');
     }
     update() {
-
+        this.x++;
     }
     draw(context) {
-        context.fillStyle = 'red';
-        context.fillRect(this.x, this.y, this.width, this.height);
-        context.drawImage(this.image, sx, sy, sw, sh, this.x, this.y, this.width, this.height);
+        context.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 }
