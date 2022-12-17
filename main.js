@@ -20,17 +20,34 @@ window.addEventListener("load", function () {
       this.player = new Player(this);
       this.input = new InputHandler();
       this.enemies = [];
+      this.enemyTimer = 0;
+      this.enemyInterval = 1000;
     }
     update(deltaTime) {
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
+      // handle enemies
+      if (this.enemyTimer > this.enemyInterval) {
+        this.addEnemy();
+        this.enemyTimer = 0;
+      } else {
+        this.enemyTimer += deltaTime;
+      }
+      this.enemies.forEach(enemy => {
+        enemy.update(deltaTime);
+      })
+
     }
     draw(context) {
         this.background.draw(context);
-      this.player.draw(context);
+        this.player.draw(context);
+        this.enemies.forEach(enemy => {
+          enemy.draw(context);
+        })
     }
     addEnemy() {
       this.enemies.push(new FlyingEnemy)
+      console.log(this.enemies)
     }
   }
 
